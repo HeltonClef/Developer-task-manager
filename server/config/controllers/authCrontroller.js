@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtpken");
-const user = require("../models/User");
+const user = require("../../models/User");
 
 //Signup Endpoint Logic
 exports.signup = async (requestAnimationFrame, res) => {
