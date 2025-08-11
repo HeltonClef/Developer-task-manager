@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 
-//Check token and sets req.user
+// Check token and set req.user
 exports.protect = (req, res, next) => {
   const auth = req.headers.authorization;
-  if (!auth || !auth.starstWith("Bearer"))
+  if (!auth || !auth.startsWith("Bearer"))
     return res.status(401).json({ message: "Token not provided" });
 
   const token = auth.split(" ")[1];
@@ -17,12 +17,11 @@ exports.protect = (req, res, next) => {
   }
 };
 
-//Check role
+// Check role
 exports.authorize = (roles) => {
-return (req, res, next) =>{
-  if(!roles.includes(req.user.role)) return res.status(403).json([message: "Forbidden"])
-    next( )
-}
-
-
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role))
+      return res.status(403).json({ message: "Forbidden" });
+    next();
+  };
 };
