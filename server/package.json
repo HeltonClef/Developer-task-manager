@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "pnpm nodemon"
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",

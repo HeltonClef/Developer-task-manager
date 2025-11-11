@@ -1,15 +1,22 @@
 const mongoose = require("mongoose");
 
-//connects to MongoDB using mongoose
+// Connect to MongoDB using mongoose
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("MongoDB connected successfully");
+    // Remove the deprecated options
+    const conn = await mongoose.connect(process.env.MONGO_URI);
+
+    console.log(`✅ MongoDB Connected SUCCESSFULLY: ${conn.connection.host}`);
+    console.log(`📊 Database: ${conn.connection.name}`);
   } catch (error) {
-    console.error("MongoDb connection failed:", error.message);
+    console.error("❌ MongoDB connection failed:", error.message);
+    console.log(
+      "💡 Connection string used:",
+      process.env.MONGO_URI?.replace(
+        /mongodb\+srv:\/\/([^:]+):([^@]+)@/,
+        "mongodb+srv://username:password@"
+      )
+    );
     process.exit(1);
   }
 };
